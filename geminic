@@ -3,7 +3,7 @@
 usage() {
     echo "Usage: $0 [-h|--help] [command [argument ...]]"
 	echo
-	echo "gemini-cli in docker."
+	echo "gemini-cli in container."
     echo
     echo "Options:"
     echo "  -h, --help    Show this help message and exit."
