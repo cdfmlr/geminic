@@ -1,0 +1,21 @@
+services:
+  gemini:
+    image: gemini-cli:latest
+    pull_policy: never
+    build: .
+    # container_name: gemini-cli
+    environment:
+      - TZ=America/New_York
+      - LANG=C.UTF-8
+      ## for Individual OAuth login (Using your Google Account), none of following are required.
+      #- GEMINI_API_KEY=${GEMINI_API_KEY}
+      #- GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      #- GOOGLE_GENAI_USE_VERTEXAI=${GOOGLE_GENAI_USE_VERTEXAI}
+    volumes:
+      - ./workspace:/workspace
+      - ./data/gemini:/root/.gemini
+      - ./data/config:/root/.config
+    working_dir: /workspace
+    tty: true
+    stdin_open: true
+
