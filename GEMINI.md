@@ -1,39 +1,34 @@
-# Project Overview: geminic
+# GEMINI.md
 
-This project provides a self-contained, Dockerized environment for using the Gemini CLI. It simplifies the setup process and ensures a consistent experience.
+## Project Overview
 
-The key components are:
+This project provides a self-contained, Dockerized environment for the Gemini CLI. This document provides instructions for the Gemini CLI AI agent to assist in the development of this project.
 
-*   **`Dockerfile`**: Defines the Docker image, which includes the Gemini CLI and its dependencies.
-*   **`compose.yaml`**: Configures the Docker Compose service for easy container management.
-*   **`docker-entrypoint.sh`**: A script that runs on container startup, displaying a welcome message.
-*   **`geminic`**: A convenience script for interacting with the Gemini CLI inside the container.
+## Core Components
 
-## Using the Gemini CLI
+*   **`Dockerfile`**: Defines the Docker image. Modifications to this file will require a rebuild of the image.
+*   **`compose.yaml`**: Configures the Docker Compose service. Changes here may affect environment variables, volumes, and other service settings.
+*   **`geminic`**: A bash script for interacting with the container. It can be modified to add new functionality or change existing behavior.
+*   **`docker-entrypoint.sh`**: The entrypoint script for the Docker container. It can be modified to change the container's startup behavior.
+*   **`README.md`**: The main documentation for the project.
 
-To get started, you can use the `geminic` script. This script handles starting the container and running commands within it.
+## Development Philosophy
 
-**Examples:**
+As an AI assistant, your role is to help with the development of this project. You should follow these principles:
 
-*   Run an interactive Gemini session:
-    ```bash
-    ./geminic
-    ```
-*   Run Gemini CLI with custom options:
-    ```bash
-    ./geminic gemini -p "Hello, world!"
-    ```
-*   Access a shell inside the container:
-    ```bash
-    ./geminic bash
-    ```
+1.  **Understand the Goal:** Before making any changes, take the time to understand the user's request and the existing codebase.
+2.  **Propose a Plan:** Inform the user of your plan before you start making changes. This gives the user a chance to provide feedback and ensures that you are on the right track.
+3.  **Implement the Changes:** Use the tools at your disposal to implement the changes as planned.
+4.  **User-Led Execution:** When it comes to tasks that have side effects, such as building the Docker image or running tests, you should provide the user with the necessary commands and let them execute them. You should not run these commands yourself.
 
-The `geminic` script is a wrapper around `docker compose` commands. It automatically starts the container (if not already running) and then executes your command inside it.
+## User Interaction
 
-### Working with Your Files
+When you have completed a task that requires user action, you should notify the user and provide them with the relevant commands to run.
 
-To work with your own project files inside the Gemini container, place them in the `./workspace` directory. This directory is mounted into the container at `/workspace`, so you can access and modify your files from either your local machine or within the container.
+**Example:**
 
-## Developing the `geminic` Project
-
-If you are developing the `geminic` project itself, you will be directly modifying the files in current (project root) directory, such as the `Dockerfile` or `docker-entrypoint.sh`. 
+> I have updated the `Dockerfile` with the requested changes. Please rebuild the Docker image to apply the changes:
+>
+> ```bash
+> docker compose build
+> ```
