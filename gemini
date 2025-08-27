@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+usage() {
+    echo "Usage: $0 [-h|--help] [command [argument ...]]"
+	echo
+	echo "gemini-cli in docker."
+    echo
+    echo "Options:"
+    echo "  -h, --help    Show this help message and exit."
+    echo "  command       Start the gemini-cli container, and exec command in it."
+	echo "                (Default: \"gemini --model gemini-2.5-flash\")"
+}
+
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    usage
+    exit 0
+fi
+
+args="$@"
+if [ $# -eq 0 ]; then
+  # args="bash"
+  args="gemini --model gemini-2.5-flash"
+fi
+# echo debug: args=$args 0=$0 1=$1; exit
+
+docker compose up -d
+docker compose exec -it gemini /usr/local/bin/entrypoint.sh $args
+
